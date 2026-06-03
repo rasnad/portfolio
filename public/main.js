@@ -4,7 +4,6 @@ const navSheet = document.querySelector("[data-nav-sheet]");
 const localeButtons = document.querySelectorAll("[data-locale-set]");
 const localeModal = document.querySelector("[data-locale-modal]");
 const localeModalOpen = document.querySelector("[data-locale-modal-open]");
-const localeModalClose = document.querySelectorAll("[data-locale-modal-close]");
 const localeCurrentLabel = document.querySelector("[data-locale-current-label]");
 const localeModalOptions = document.querySelectorAll("[data-locale-modal-option]");
 const form = document.querySelector("[data-contact-form]");
@@ -18,6 +17,10 @@ function setScrolledNav() {
 
 function getLocale() {
   return localStorage.getItem("portfolio-locale") || "en";
+}
+
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 760px)").matches;
 }
 
 function applyLocale(locale) {
@@ -71,14 +74,11 @@ function toggleLocaleModal(isOpen) {
   if (!localeModal) return;
   localeModal.hidden = !isOpen;
   localeModal.classList.toggle("open", isOpen);
+  document.body.classList.toggle("locale-modal-open", isOpen);
 }
 
 localeModalOpen?.addEventListener("click", () => {
   toggleLocaleModal(true);
-});
-
-localeModalClose.forEach((button) => {
-  button.addEventListener("click", () => toggleLocaleModal(false));
 });
 
 navSheet?.querySelectorAll("a").forEach((link) => {
@@ -91,6 +91,16 @@ navSheet?.querySelectorAll("a").forEach((link) => {
 });
 
 applyLocale(getLocale());
+
+if (isMobileViewport()) {
+  toggleLocaleModal(true);
+}
+
+window.addEventListener("resize", () => {
+  if (!isMobileViewport()) {
+    toggleLocaleModal(false);
+  }
+});
 
 localeButtons.forEach((button) => {
   button.addEventListener("click", () => {

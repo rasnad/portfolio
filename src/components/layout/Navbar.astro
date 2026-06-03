@@ -42,7 +42,7 @@ import { navCopy } from "@/data/copy";
 </div>
 
 <div class="locale-modal" data-locale-modal hidden>
-  <button class="locale-modal-backdrop" type="button" aria-label={navCopy.languageSwitch.en} data-i18n-aria-en={navCopy.languageSwitch.en} data-i18n-aria-es={navCopy.languageSwitch.es} data-locale-modal-close></button>
+  <div class="locale-modal-backdrop" aria-hidden="true"></div>
   <div class="locale-modal-card" role="dialog" aria-modal="true" aria-label={navCopy.chooseLanguage.en} data-i18n-aria-en={navCopy.chooseLanguage.en} data-i18n-aria-es={navCopy.chooseLanguage.es}>
     <p class="locale-modal-kicker" data-i18n-en={navCopy.chooseLanguage.en} data-i18n-es={navCopy.chooseLanguage.es}>{navCopy.chooseLanguage.en}</p>
     <button class="locale-modal-option" type="button" data-locale-set="en" data-locale-modal-option>

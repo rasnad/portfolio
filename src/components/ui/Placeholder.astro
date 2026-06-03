@@ -1,0 +1,10 @@
+---
+type Props = {
+  label: string;
+  aspectRatio?: string;
+};
+
+const { label, aspectRatio = "16 / 10" } = Astro.props;
+---
+
+<div class="ph" data-label={label} style={`aspect-ratio:${aspectRatio};`}></div>

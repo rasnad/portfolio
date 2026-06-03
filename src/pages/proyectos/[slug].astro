@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectDetail from "@/components/projects/ProjectDetail.astro";
+import { projects, getProjectBySlug } from "@/data/projects";
+import { site } from "@/data/site";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug ?? "");
+
+if (!project) {
+  return Astro.redirect("/");
+}
+---
+
+<BaseLayout
+  title={`${project.title} - Project case by ${site.name}`}
+  description={project.summary.en}
+>
+  <ProjectDetail project={project} />
+</BaseLayout>

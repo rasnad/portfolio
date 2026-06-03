@@ -1,0 +1,50 @@
+---
+import { site } from "@/data/site";
+import ArrowIcon from "@/components/ui/ArrowIcon.astro";
+import { contactCopy } from "@/data/copy";
+---
+
+<section class="section" id="contacto">
+  <div class="wrap contact-grid">
+    <div class="contact-lead">
+      <span class="kicker" data-i18n-en={contactCopy.kicker.en} data-i18n-es={contactCopy.kicker.es}>{contactCopy.kicker.en}</span>
+      <h2 data-i18n-en={contactCopy.title.en} data-i18n-es={contactCopy.title.es}>{contactCopy.title.en}</h2>
+      <p data-i18n-en={contactCopy.lead.en} data-i18n-es={contactCopy.lead.es}>{contactCopy.lead.en}</p>
+      <div class="contact-meta">
+        <a href={`mailto:${site.email}`}><span class="ml" data-i18n-en={contactCopy.emailLabel.en} data-i18n-es={contactCopy.emailLabel.es}>{contactCopy.emailLabel.en}</span> {site.email}</a>
+        <a href={site.social.linkedin}><span class="ml" data-i18n-en={contactCopy.socialLabel.en} data-i18n-es={contactCopy.socialLabel.es}>{contactCopy.socialLabel.en}</span> {contactCopy.linkedin.en}</a>
+        <span><span class="ml" data-i18n-en={contactCopy.baseLabel.en} data-i18n-es={contactCopy.baseLabel.es}>{contactCopy.baseLabel.en}</span> {site.location}</span>
+      </div>
+    </div>
+
+    <div>
+      <form class="form" novalidate data-contact-form>
+        <div class="field">
+          <label for="nombre" data-i18n-en={contactCopy.form.name.en} data-i18n-es={contactCopy.form.name.es}>{contactCopy.form.name.en}</label>
+          <input type="text" id="nombre" name="nombre" placeholder={contactCopy.form.namePlaceholder.en} autocomplete="name" data-i18n-placeholder-en={contactCopy.form.namePlaceholder.en} data-i18n-placeholder-es={contactCopy.form.namePlaceholder.es} />
+          <span class="err"></span>
+        </div>
+        <div class="field">
+          <label for="email" data-i18n-en={contactCopy.form.email.en} data-i18n-es={contactCopy.form.email.es}>{contactCopy.form.email.en}</label>
+          <input type="email" id="email" name="email" placeholder={contactCopy.form.emailPlaceholder.en} autocomplete="email" data-i18n-placeholder-en={contactCopy.form.emailPlaceholder.en} data-i18n-placeholder-es={contactCopy.form.emailPlaceholder.es} />
+          <span class="err"></span>
+        </div>
+        <div class="field">
+          <label for="mensaje" data-i18n-en={contactCopy.form.message.en} data-i18n-es={contactCopy.form.message.es}>{contactCopy.form.message.en}</label>
+          <textarea id="mensaje" name="mensaje" rows="4" placeholder={contactCopy.form.messagePlaceholder.en} data-i18n-placeholder-en={contactCopy.form.messagePlaceholder.en} data-i18n-placeholder-es={contactCopy.form.messagePlaceholder.es}></textarea>
+          <span class="err"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" data-i18n-en={contactCopy.form.submit.en} data-i18n-es={contactCopy.form.submit.es}>
+          {contactCopy.form.submit.en}
+          <ArrowIcon />
+        </button>
+      </form>
+      <div class="form-ok" data-form-ok data-i18n-success-en={contactCopy.form.success.en} data-i18n-success-es={contactCopy.form.success.es}>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 6 9 17l-5-5" stroke="#1f9d57" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>{contactCopy.form.success.en.replace("{name}", "")}</span>
+      </div>
+    </div>
+  </div>
+</section>

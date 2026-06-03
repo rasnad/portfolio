@@ -1,0 +1,116 @@
+---
+import type { Project } from "@/data/projects";
+import { getNextProject } from "@/data/projects";
+import Button from "@/components/ui/Button.astro";
+import ArrowIcon from "@/components/ui/ArrowIcon.astro";
+import Mockup from "@/components/ui/Mockup.astro";
+import { detailCopy } from "@/data/copy";
+
+type Props = {
+  project: Project;
+};
+
+const { project } = Astro.props;
+const nextProject = getNextProject(project.slug);
+---
+
+<main>
+  <section class="detail-hero">
+    <div class="wrap">
+      <a class="back-link" href="/#proyectos">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M19 12H5M5 12l6-6M5 12l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span data-i18n-en={detailCopy.back.en} data-i18n-es={detailCopy.back.es}>{detailCopy.back.en}</span>
+      </a>
+      <span class="proj-cat detail-cat" data-i18n-en={project.type.en} data-i18n-es={project.type.es}>{project.type.en}</span>
+      <h1>{project.title}</h1>
+      <div class="detail-meta">
+        <div><div class="ml" data-i18n-en={detailCopy.metaType.en} data-i18n-es={detailCopy.metaType.es}>{detailCopy.metaType.en}</div><div class="mv" data-i18n-en={project.type.en} data-i18n-es={project.type.es}>{project.type.en}</div></div>
+        <div><div class="ml" data-i18n-en={detailCopy.metaYear.en} data-i18n-es={detailCopy.metaYear.es}>{detailCopy.metaYear.en}</div><div class="mv">{project.year}</div></div>
+        <div><div class="ml" data-i18n-en={detailCopy.metaRole.en} data-i18n-es={detailCopy.metaRole.es}>{detailCopy.metaRole.en}</div><div class="mv" data-i18n-en={project.role.en} data-i18n-es={project.role.es}>{project.role.en}</div></div>
+        <div>
+          <div class="ml" data-i18n-en={detailCopy.metaStatus.en} data-i18n-es={detailCopy.metaStatus.es}>{detailCopy.metaStatus.en}</div>
+          <div class={`mv status-chip ${project.statusTone ? `status-${project.statusTone}` : ""}`} data-i18n-en={project.status.en} data-i18n-es={project.status.es}>{project.status.en}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap detail-figure">
+    <Mockup
+      url={project.mockupUrlLabel}
+      label={project.gallery[0]?.label.en ?? `capture - ${project.title}`}
+      aspectRatio="16 / 9"
+      image={project.image}
+    />
+  </section>
+
+  <section class="section">
+    <div class="wrap detail-body">
+      <div class="detail-block">
+        <h2 data-i18n-en={detailCopy.context.en} data-i18n-es={detailCopy.context.es}>{detailCopy.context.en}</h2>
+        <p data-i18n-en={project.context.en} data-i18n-es={project.context.es}>{project.context.en}</p>
+      </div>
+      <div class="detail-block">
+        <h2 data-i18n-en={detailCopy.whatIDid.en} data-i18n-es={detailCopy.whatIDid.es}>{detailCopy.whatIDid.en}</h2>
+        <ul class="did-list">
+          {
+            project.whatIDid.map((item, index) => (
+              <li>
+                <span class="n">{String(index + 1).padStart(2, "0")}</span>
+                <span data-i18n-en={item.en} data-i18n-es={item.es}>{item.en}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {
+    !project.hideResultSection && (
+      <section class="section result-section">
+        <div class="wrap">
+          <span class="kicker" data-i18n-en={detailCopy.result.en} data-i18n-es={detailCopy.result.es}>{detailCopy.result.en}</span>
+          <p class="result-copy" data-i18n-en={project.result.en} data-i18n-es={project.result.es}>{project.result.en}</p>
+          {
+            project.gallery.length > 0 && (
+              <div class="gallery">
+                {
+                  project.gallery.slice(0, 1).map((item) => (
+                    <Mockup
+                      url={item.hasBrowserBar ? project.mockupUrlLabel : undefined}
+                      label={item.label.en}
+                      aspectRatio={item.aspectRatio}
+                      browserBar={item.hasBrowserBar}
+                      image={item.image}
+                      video={item.video}
+                    />
+                  ))
+                }
+              </div>
+            )
+          }
+        </div>
+      </section>
+    )
+  }
+
+  <section class="wrap">
+    <div class="detail-cta">
+      <h3 data-i18n-en={detailCopy.visitProject(project.title).en} data-i18n-es={detailCopy.visitProject(project.title).es}>{detailCopy.visitProject(project.title).en}</h3>
+      <Button href={project.url ?? "/#contacto"} size="large" external={Boolean(project.url)} data-i18n-en={detailCopy.visitProject(project.title).en} data-i18n-es={detailCopy.visitProject(project.title).es}>
+        {detailCopy.visitProject(project.title).en}
+        <ArrowIcon />
+      </Button>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <a class="next-proj" href={`/proyectos/${nextProject.slug}`}>
+      <div><div class="nl" data-i18n-en={detailCopy.nextProject.en} data-i18n-es={detailCopy.nextProject.es}>{detailCopy.nextProject.en}</div><div class="nn">{nextProject.title}</div></div>
+      <ArrowIcon />
+    </a>
+  </section>
+</main>

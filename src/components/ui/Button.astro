@@ -1,0 +1,16 @@
+---
+type Props = {
+  href: string;
+  variant?: "primary" | "ghost";
+  size?: "default" | "large";
+  external?: boolean;
+  [key: string]: any;
+};
+
+const { href, variant = "primary", size = "default", external = false, ...rest } = Astro.props;
+const classes = ["btn", `btn-${variant}`, size === "large" ? "btn-lg" : ""].filter(Boolean).join(" ");
+---
+
+<a class={classes} href={href} target={external ? "_blank" : undefined} rel={external ? "noopener" : undefined} {...rest}>
+  <slot />
+</a>

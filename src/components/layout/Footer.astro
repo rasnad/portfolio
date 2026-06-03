@@ -1,0 +1,31 @@
+---
+import { site } from "@/data/site";
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-big">¿Trabajamos <a href="/#contacto">juntos?</a></div>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <a href="/#proyectos">Trabajos</a>
+          <a href="/#estudio">Sobre mí</a>
+          <a href="/#servicios">Servicios</a>
+          <a href="/#contacto">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <a href={site.social.instagram}>Instagram</a>
+          <a href={site.social.linkedin}>LinkedIn</a>
+          <a href={site.social.github}>GitHub</a>
+          <a href={`mailto:${site.email}`}>Email</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 {site.name}. Todos los derechos reservados.</span>
+      <span>Diseñado y desarrollado con cuidado.</span>
+    </div>
+  </div>
+</footer>

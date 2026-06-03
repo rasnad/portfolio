@@ -1,0 +1,33 @@
+---
+import Button from "@/components/ui/Button.astro";
+import ArrowIcon from "@/components/ui/ArrowIcon.astro";
+import { heroCopy } from "@/data/copy";
+---
+
+<section class="hero">
+  <div class="wrap">
+    <h1 data-i18n-html-en={heroCopy.title.en} data-i18n-html-es={heroCopy.title.es} set:html={heroCopy.title.en}></h1>
+    <div class="hero-cta">
+      <Button href="#proyectos" size="large" data-i18n-en={heroCopy.workCta.en} data-i18n-es={heroCopy.workCta.es}>
+        {heroCopy.workCta.en}
+        <ArrowIcon />
+      </Button>
+      <Button href="#contacto" variant="ghost" size="large" data-i18n-en={heroCopy.contactCta.en} data-i18n-es={heroCopy.contactCta.es}>{heroCopy.contactCta.en}</Button>
+      <Button href="#estudio" variant="ghost" size="large" data-i18n-en={heroCopy.aboutCta.en} data-i18n-es={heroCopy.aboutCta.es}>{heroCopy.aboutCta.en}</Button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        {
+          [...heroCopy.marquee.en, ...heroCopy.marquee.en].map((item, index) => (
+            <span class="marquee-item" data-i18n-en={item} data-i18n-es={heroCopy.marquee.es[index % heroCopy.marquee.es.length]}>
+              {item}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import { aboutCopy } from "@/data/copy";
+---
+
+<section class="section about" id="estudio">
+  <div class="wrap about-grid">
+    <div class="about-portrait">
+      <img src="/assets/profile.jpeg" alt="Retrato de Lucas Espinosa" loading="lazy" />
+    </div>
+    <div class="about-body">
+      <span class="kicker" data-i18n-en={aboutCopy.kicker.en} data-i18n-es={aboutCopy.kicker.es}>{aboutCopy.kicker.en}</span>
+      <h2 data-i18n-html-en={aboutCopy.title.en} data-i18n-html-es={aboutCopy.title.es} set:html={aboutCopy.title.en}></h2>
+      <p class="muted-lead" data-i18n-en={aboutCopy.body.en} data-i18n-es={aboutCopy.body.es}>{aboutCopy.body.en}</p>
+      <div class="about-stats">
+        {
+          aboutCopy.stats.map((stat) => (
+            <div class="about-stat">
+              <div class="n" data-i18n-en={stat.value.en} data-i18n-es={stat.value.es}>{stat.value.en}</div>
+              <div class="l" data-i18n-en={stat.label.en} data-i18n-es={stat.label.es}>{stat.label.en}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

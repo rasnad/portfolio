@@ -1,0 +1,34 @@
+---
+import { navCopy } from "@/data/copy";
+---
+
+<header class="nav" data-nav>
+  <div class="wrap nav-inner">
+    <a class="brand brand-hidden" href="/" aria-label={navCopy.home.en} data-i18n-aria-en={navCopy.home.en} data-i18n-aria-es={navCopy.home.es}></a>
+    <nav class="nav-links" aria-label={navCopy.mainNavigation.en} data-i18n-aria-en={navCopy.mainNavigation.en} data-i18n-aria-es={navCopy.mainNavigation.es}>
+      <a href="/#proyectos" data-i18n-en={navCopy.work.en} data-i18n-es={navCopy.work.es}>{navCopy.work.en}</a>
+      <a href="/#estudio" data-i18n-en={navCopy.about.en} data-i18n-es={navCopy.about.es}>{navCopy.about.en}</a>
+      <a href="/#servicios" data-i18n-en={navCopy.services.en} data-i18n-es={navCopy.services.es}>{navCopy.services.en}</a>
+      <a class="btn btn-primary nav-cta" href="/#contacto" data-i18n-en={navCopy.contactCta.en} data-i18n-es={navCopy.contactCta.es}>{navCopy.contactCta.en}</a>
+    </nav>
+    <div class="locale-switch" role="group" aria-label={navCopy.languageSwitch.en} data-i18n-aria-en={navCopy.languageSwitch.en} data-i18n-aria-es={navCopy.languageSwitch.es}>
+      <button class="locale-btn is-active" type="button" data-locale-set="en">EN</button>
+      <button class="locale-btn" type="button" data-locale-set="es">ES</button>
+    </div>
+    <button class="nav-toggle" type="button" aria-label={navCopy.openMenu.en} aria-expanded="false" data-nav-toggle data-i18n-aria-en={navCopy.openMenu.en} data-i18n-aria-es={navCopy.openMenu.es}>
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="nav-sheet" data-nav-sheet>
+  <a href="/#proyectos" data-i18n-en={navCopy.work.en} data-i18n-es={navCopy.work.es}>{navCopy.work.en}</a>
+  <a href="/#estudio" data-i18n-en={navCopy.about.en} data-i18n-es={navCopy.about.es}>{navCopy.about.en}</a>
+  <a href="/#servicios" data-i18n-en={navCopy.services.en} data-i18n-es={navCopy.services.es}>{navCopy.services.en}</a>
+  <a href="/#contacto" data-i18n-en={navCopy.contact.en} data-i18n-es={navCopy.contact.es}>{navCopy.contact.en}</a>
+  <a class="btn btn-primary" href="/#contacto" data-i18n-en={navCopy.contactCta.en} data-i18n-es={navCopy.contactCta.es}>{navCopy.contactCta.en}</a>
+  <div class="locale-switch locale-switch-mobile" role="group" aria-label={navCopy.languageSwitch.en} data-i18n-aria-en={navCopy.languageSwitch.en} data-i18n-aria-es={navCopy.languageSwitch.es}>
+    <button class="locale-btn is-active" type="button" data-locale-set="en">EN</button>
+    <button class="locale-btn" type="button" data-locale-set="es">ES</button>
+  </div>
+</div>

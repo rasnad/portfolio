@@ -1,0 +1,20 @@
+---
+import { projects } from "@/data/projects";
+import ProjectCard from "@/components/projects/ProjectCard.astro";
+import { featuredProjectsCopy } from "@/data/copy";
+---
+
+<section class="section" id="proyectos">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker" data-i18n-en={featuredProjectsCopy.kicker.en} data-i18n-es={featuredProjectsCopy.kicker.es}>{featuredProjectsCopy.kicker.en}</span>
+        <h2 data-i18n-en={featuredProjectsCopy.title.en} data-i18n-es={featuredProjectsCopy.title.es}>{featuredProjectsCopy.title.en}</h2>
+      </div>
+    </div>
+
+    <div class="projects-grid">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </div>
+</section>

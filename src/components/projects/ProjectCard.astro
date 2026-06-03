@@ -1,0 +1,49 @@
+---
+import type { Project } from "@/data/projects";
+import Mockup from "@/components/ui/Mockup.astro";
+import ArrowIcon from "@/components/ui/ArrowIcon.astro";
+import { featuredProjectsCopy } from "@/data/copy";
+
+type Props = {
+  project: Project;
+  index: number;
+};
+
+const { project, index } = Astro.props;
+const number = String(index + 1).padStart(2, "0");
+---
+
+<a
+  class="proj"
+  href={`/proyectos/${project.slug}`}
+  aria-label={featuredProjectsCopy.viewProjectCard(project.title).en}
+  data-i18n-aria-en={featuredProjectsCopy.viewProjectCard(project.title).en}
+  data-i18n-aria-es={featuredProjectsCopy.viewProjectCard(project.title).es}
+>
+  <div class="proj-index-group">
+    <span class="proj-idx">{number}</span>
+    {
+      project.cardBadge && (
+        <span class="proj-badge" data-i18n-en={project.cardBadge.en} data-i18n-es={project.cardBadge.es}>
+          <span class="proj-badge-dot"></span>
+          {project.cardBadge.en}
+        </span>
+      )
+    }
+  </div>
+  <div class="proj-media">
+    <Mockup url={project.mockupUrlLabel} label={`mockup - ${project.title}`} image={project.image} />
+  </div>
+  <div class="proj-info">
+    <span class="proj-cat" data-i18n-en={project.type.en} data-i18n-es={project.type.es}>{project.type.en}</span>
+    <h3 class="proj-name">{project.title}</h3>
+    <p class="proj-desc" data-i18n-en={project.summary.en} data-i18n-es={project.summary.es}>{project.summary.en}</p>
+    <div class="tag-list">
+      {project.tags.map((tag) => <span data-i18n-en={tag.en} data-i18n-es={tag.es}>{tag.en}</span>)}
+    </div>
+    <span class="arrow-link proj-go" data-i18n-en={featuredProjectsCopy.viewProject.en} data-i18n-es={featuredProjectsCopy.viewProject.es}>
+      {featuredProjectsCopy.viewProject.en}
+      <ArrowIcon />
+    </span>
+  </div>
+</a>

@@ -1,0 +1,40 @@
+---
+import Placeholder from "./Placeholder.astro";
+
+type Props = {
+  url?: string;
+  label: string;
+  aspectRatio?: string;
+  browserBar?: boolean;
+  image?: string;
+  video?: string;
+};
+
+const { url, label, aspectRatio = "16 / 10", browserBar = true, image, video } = Astro.props;
+---
+
+<div class="mock">
+  {
+    browserBar && (
+      <div class="mock-bar">
+        <div class="mock-dots"><i></i><i></i><i></i></div>
+        {url && <div class="mock-url">{url}</div>}
+      </div>
+    )
+  }
+  {
+    video ? (
+      <div class="mock-video" style={`aspect-ratio:${aspectRatio};`}>
+        <video autoplay muted loop playsinline preload="auto" aria-label={label}>
+          <source src={video} type="video/mp4" />
+        </video>
+      </div>
+    ) : image ? (
+      <div class="mock-image" style={`aspect-ratio:${aspectRatio};`}>
+        <img src={image} alt={label} loading="lazy" />
+      </div>
+    ) : (
+      <Placeholder label={label} aspectRatio={aspectRatio} />
+    )
+  }
+</div>

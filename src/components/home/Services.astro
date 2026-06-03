@@ -1,0 +1,27 @@
+---
+import { services } from "@/data/services";
+import { servicesCopy } from "@/data/copy";
+---
+
+<section class="section services" id="servicios">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="kicker" data-i18n-en={servicesCopy.kicker.en} data-i18n-es={servicesCopy.kicker.es}>{servicesCopy.kicker.en}</span>
+        <h2 data-i18n-en={servicesCopy.title.en} data-i18n-es={servicesCopy.title.es}>{servicesCopy.title.en}</h2>
+      </div>
+      <p data-i18n-en={servicesCopy.lead.en} data-i18n-es={servicesCopy.lead.es}>{servicesCopy.lead.en}</p>
+    </div>
+    <div class="services-list">
+      {
+        services.map((service, index) => (
+          <div class="service">
+            <span class="service-n">{String(index + 1).padStart(2, "0")}</span>
+            <span class="service-name" data-i18n-en={service.name.en} data-i18n-es={service.name.es}>{service.name.en}</span>
+            <span class="service-desc" data-i18n-en={service.description.en} data-i18n-es={service.description.es}>{service.description.en}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -63,7 +63,7 @@ export const contactCopy = {
   kicker: text("Contact", "Contacto"),
   title: text(
     "Your product can also have a stronger digital presence. Let's build it together.",
-    "Tu producto también puede tener una mejor presencia digital. Construyámoslo juntos."
+    "Tu producto también puede tener una mejor presencia digital. Construyámosla juntos."
   ),
   lead: text("Tell me what you're thinking.", "Contame qué estás pensando"),
   emailLabel: text("Email", "Email"),

@@ -78,9 +78,14 @@ export const contactCopy = {
     emailPlaceholder: text("you@email.com", "tu@email.com"),
     messagePlaceholder: text("Tell me about your project", "Contame sobre tu proyecto"),
     submit: text("Send message", "Enviar mensaje"),
+    sending: text("Sending...", "Enviando..."),
     success: text(
       "Thanks{name}. Your message was sent. I'll get back to you soon.",
       "Gracias{name}. Tu mensaje fue enviado. Te respondo a la brevedad."
+    ),
+    error: text(
+      "I couldn't send your message right now. Please try again in a moment or email me directly.",
+      "No pude enviar tu mensaje ahora. Probá de nuevo en un momento o escribime directo por email."
     ),
     errors: {
       name: text("Enter your name.", "Ingresá tu nombre."),

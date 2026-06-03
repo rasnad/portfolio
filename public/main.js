@@ -4,6 +4,8 @@ const navSheet = document.querySelector("[data-nav-sheet]");
 const localeButtons = document.querySelectorAll("[data-locale-set]");
 const form = document.querySelector("[data-contact-form]");
 const okMessage = document.querySelector("[data-form-ok]");
+const submitButton = form?.querySelector("[data-submit-button]");
+const submitButtonLabel = submitButton?.querySelector("span");
 
 function setScrolledNav() {
   nav?.classList.toggle("scrolled", window.scrollY > 24);
@@ -106,6 +108,28 @@ function validateField(field) {
   return result === true;
 }
 
+function getFormLocale() {
+  return document.documentElement.lang === "es" ? "es" : "en";
+}
+
+function setFormMessage(text, tone = "success") {
+  const message = okMessage?.querySelector("span");
+  if (message) message.textContent = text;
+  okMessage?.classList.toggle("is-error", tone === "error");
+  okMessage?.classList.add("show");
+}
+
+function setSubmitState(isSending) {
+  if (!submitButton) return;
+  const locale = getFormLocale();
+  const idleLabel = locale === "es" ? submitButton.dataset.i18nEs : submitButton.dataset.i18nEn;
+  const sendingLabel = locale === "es" ? form?.dataset.i18nSendingEs : form?.dataset.i18nSendingEn;
+
+  submitButton.disabled = isSending;
+  submitButton.setAttribute("aria-busy", String(isSending));
+  if (submitButtonLabel) submitButtonLabel.textContent = isSending ? sendingLabel || idleLabel || "" : idleLabel || "";
+}
+
 if (form) {
   const fields = Array.from(form.querySelectorAll("input, textarea"));
 
@@ -128,14 +152,45 @@ if (form) {
       return;
     }
 
-    const locale = document.documentElement.lang === "es" ? "es" : "en";
+    const locale = getFormLocale();
     const firstName = fields.find((field) => field.name === "nombre")?.value.trim().split(" ")[0];
-    const template = locale === "es" ? okMessage?.dataset.i18nSuccessEs : okMessage?.dataset.i18nSuccessEn;
-    const text = template?.replace("{name}", firstName ? `, ${firstName}` : "") || "";
-    const message = okMessage?.querySelector("span");
-    if (message) message.textContent = text;
+    const endpoint = form.dataset.contactEndpoint;
+    const payload = new FormData(form);
 
-    form.hidden = true;
-    okMessage?.classList.add("show");
+    if (!endpoint) return;
+
+    okMessage?.classList.remove("show", "is-error");
+    setSubmitState(true);
+
+    fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: payload,
+    })
+      .then(async (response) => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || data.success === "false") {
+          throw new Error("request_failed");
+        }
+
+        const template = locale === "es" ? okMessage?.dataset.i18nSuccessEs : okMessage?.dataset.i18nSuccessEn;
+        const text = template?.replace("{name}", firstName ? `, ${firstName}` : "") || "";
+
+        fields.forEach((field) => {
+          field.value = "";
+          setFieldState(field, "");
+        });
+
+        setFormMessage(text, "success");
+      })
+      .catch(() => {
+        const errorText = locale === "es" ? form.dataset.i18nErrorEs : form.dataset.i18nErrorEn;
+        setFormMessage(errorText || "", "error");
+      })
+      .finally(() => {
+        setSubmitState(false);
+      });
   });
 }

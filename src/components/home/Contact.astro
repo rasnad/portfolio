@@ -18,7 +18,19 @@ import { contactCopy } from "@/data/copy";
     </div>
 
     <div>
-      <form class="form" novalidate data-contact-form>
+      <form
+        class="form"
+        novalidate
+        data-contact-form
+        data-contact-endpoint={`https://formsubmit.co/ajax/${site.email}`}
+        data-i18n-sending-en={contactCopy.form.sending.en}
+        data-i18n-sending-es={contactCopy.form.sending.es}
+        data-i18n-error-en={contactCopy.form.error.en}
+        data-i18n-error-es={contactCopy.form.error.es}
+      >
+        <input type="hidden" name="_subject" value="New portfolio contact" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="sr-only" aria-hidden="true" />
         <div class="field">
           <label for="nombre" data-i18n-en={contactCopy.form.name.en} data-i18n-es={contactCopy.form.name.es}>{contactCopy.form.name.en}</label>
           <input type="text" id="nombre" name="nombre" placeholder={contactCopy.form.namePlaceholder.en} autocomplete="name" data-i18n-placeholder-en={contactCopy.form.namePlaceholder.en} data-i18n-placeholder-es={contactCopy.form.namePlaceholder.es} />
@@ -34,12 +46,18 @@ import { contactCopy } from "@/data/copy";
           <textarea id="mensaje" name="mensaje" rows="4" placeholder={contactCopy.form.messagePlaceholder.en} data-i18n-placeholder-en={contactCopy.form.messagePlaceholder.en} data-i18n-placeholder-es={contactCopy.form.messagePlaceholder.es}></textarea>
           <span class="err"></span>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg" data-i18n-en={contactCopy.form.submit.en} data-i18n-es={contactCopy.form.submit.es}>
-          {contactCopy.form.submit.en}
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          data-submit-button
+          data-i18n-en={contactCopy.form.submit.en}
+          data-i18n-es={contactCopy.form.submit.es}
+        >
+          <span>{contactCopy.form.submit.en}</span>
           <ArrowIcon />
         </button>
       </form>
-      <div class="form-ok" data-form-ok data-i18n-success-en={contactCopy.form.success.en} data-i18n-success-es={contactCopy.form.success.es}>
+      <div class="form-ok" data-form-ok data-i18n-success-en={contactCopy.form.success.en} data-i18n-success-es={contactCopy.form.success.es} data-i18n-error-en={contactCopy.form.error.en} data-i18n-error-es={contactCopy.form.error.es}>
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M20 6 9 17l-5-5" stroke="#1f9d57" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
         </svg>

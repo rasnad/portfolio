@@ -4,7 +4,7 @@ export const site = {
   title: "Lucas Espinosa - Digital product and web developer",
   description:
     "Portfolio of Lucas Espinosa, a web and backend developer focused on websites, digital products, automations and tailored solutions for businesses.",
-  email: "lucasespinosaflorida@gmail.com",
+  email: "contacto@portfoliobylucas.com",
   location: "Montevideo, Uruguay",
   social: {
     instagram: "#",

@@ -2,6 +2,11 @@ const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const navSheet = document.querySelector("[data-nav-sheet]");
 const localeButtons = document.querySelectorAll("[data-locale-set]");
+const localeModal = document.querySelector("[data-locale-modal]");
+const localeModalOpen = document.querySelector("[data-locale-modal-open]");
+const localeModalClose = document.querySelectorAll("[data-locale-modal-close]");
+const localeCurrentLabel = document.querySelector("[data-locale-current-label]");
+const localeModalOptions = document.querySelectorAll("[data-locale-modal-option]");
 const form = document.querySelector("[data-contact-form]");
 const okMessage = document.querySelector("[data-form-ok]");
 const submitButton = form?.querySelector("[data-submit-button]");
@@ -41,6 +46,15 @@ function applyLocale(locale) {
   localeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.localeSet === locale);
   });
+
+  if (localeCurrentLabel && localeModalOpen) {
+    const text = locale === "es" ? localeModalOpen.dataset.localeLabelEs : localeModalOpen.dataset.localeLabelEn;
+    if (text) localeCurrentLabel.textContent = text;
+  }
+
+  localeModalOptions.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.localeSet === locale);
+  });
 }
 
 setScrolledNav();
@@ -51,6 +65,20 @@ navToggle?.addEventListener("click", () => {
   navSheet?.classList.toggle("open", isOpen);
   navToggle.setAttribute("aria-expanded", String(isOpen));
   document.body.classList.toggle("menu-open", isOpen);
+});
+
+function toggleLocaleModal(isOpen) {
+  if (!localeModal) return;
+  localeModal.hidden = !isOpen;
+  localeModal.classList.toggle("open", isOpen);
+}
+
+localeModalOpen?.addEventListener("click", () => {
+  toggleLocaleModal(true);
+});
+
+localeModalClose.forEach((button) => {
+  button.addEventListener("click", () => toggleLocaleModal(false));
 });
 
 navSheet?.querySelectorAll("a").forEach((link) => {
@@ -69,6 +97,7 @@ localeButtons.forEach((button) => {
     const locale = button.dataset.localeSet || "en";
     localStorage.setItem("portfolio-locale", locale);
     applyLocale(locale);
+    toggleLocaleModal(false);
   });
 });
 

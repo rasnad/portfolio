@@ -27,8 +27,29 @@ import { navCopy } from "@/data/copy";
   <a href="/#servicios" data-i18n-en={navCopy.services.en} data-i18n-es={navCopy.services.es}>{navCopy.services.en}</a>
   <a href="/#contacto" data-i18n-en={navCopy.contact.en} data-i18n-es={navCopy.contact.es}>{navCopy.contact.en}</a>
   <a class="btn btn-primary" href="/#contacto" data-i18n-en={navCopy.contactCta.en} data-i18n-es={navCopy.contactCta.es}>{navCopy.contactCta.en}</a>
-  <div class="locale-switch locale-switch-mobile" role="group" aria-label={navCopy.languageSwitch.en} data-i18n-aria-en={navCopy.languageSwitch.en} data-i18n-aria-es={navCopy.languageSwitch.es}>
-    <button class="locale-btn is-active" type="button" data-locale-set="en">EN</button>
-    <button class="locale-btn" type="button" data-locale-set="es">ES</button>
+  <button
+    class="locale-mobile-trigger"
+    type="button"
+    data-locale-modal-open
+    aria-label={navCopy.languageSwitch.en}
+    data-i18n-aria-en={navCopy.languageSwitch.en}
+    data-i18n-aria-es={navCopy.languageSwitch.es}
+    data-locale-label-en={navCopy.english.en}
+    data-locale-label-es={navCopy.spanish.es}
+  >
+    <span class="locale-mobile-trigger-label" data-locale-current-label>{navCopy.english.en}</span>
+  </button>
+</div>
+
+<div class="locale-modal" data-locale-modal hidden>
+  <button class="locale-modal-backdrop" type="button" aria-label={navCopy.languageSwitch.en} data-i18n-aria-en={navCopy.languageSwitch.en} data-i18n-aria-es={navCopy.languageSwitch.es} data-locale-modal-close></button>
+  <div class="locale-modal-card" role="dialog" aria-modal="true" aria-label={navCopy.chooseLanguage.en} data-i18n-aria-en={navCopy.chooseLanguage.en} data-i18n-aria-es={navCopy.chooseLanguage.es}>
+    <p class="locale-modal-kicker" data-i18n-en={navCopy.chooseLanguage.en} data-i18n-es={navCopy.chooseLanguage.es}>{navCopy.chooseLanguage.en}</p>
+    <button class="locale-modal-option" type="button" data-locale-set="en" data-locale-modal-option>
+      <span>{navCopy.english.en}</span>
+    </button>
+    <button class="locale-modal-option" type="button" data-locale-set="es" data-locale-modal-option>
+      <span>{navCopy.spanish.es}</span>
+    </button>
   </div>
 </div>

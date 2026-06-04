@@ -10,6 +10,7 @@ const form = document.querySelector("[data-contact-form]");
 const okMessage = document.querySelector("[data-form-ok]");
 const submitButton = form?.querySelector("[data-submit-button]");
 const submitButtonLabel = submitButton?.querySelector("span");
+const localeSessionKey = "portfolio-locale-session-seen";
 
 function setScrolledNav() {
   nav?.classList.toggle("scrolled", window.scrollY > 24);
@@ -17,6 +18,14 @@ function setScrolledNav() {
 
 function getLocale() {
   return localStorage.getItem("portfolio-locale") || "en";
+}
+
+function hasSeenLocaleModalThisSession() {
+  return sessionStorage.getItem(localeSessionKey) === "true";
+}
+
+function markLocaleModalSeen() {
+  sessionStorage.setItem(localeSessionKey, "true");
 }
 
 function isMobileViewport() {
@@ -93,7 +102,9 @@ navSheet?.querySelectorAll("a").forEach((link) => {
 applyLocale(getLocale());
 
 if (isMobileViewport()) {
-  toggleLocaleModal(true);
+  if (!hasSeenLocaleModalThisSession()) {
+    toggleLocaleModal(true);
+  }
 }
 
 window.addEventListener("resize", () => {
@@ -106,6 +117,7 @@ localeButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const locale = button.dataset.localeSet || "en";
     localStorage.setItem("portfolio-locale", locale);
+    markLocaleModalSeen();
     applyLocale(locale);
     toggleLocaleModal(false);
   });
